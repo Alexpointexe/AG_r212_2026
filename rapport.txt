@@ -1,0 +1,129 @@
+# Rapport — TP1
+
+## Points clés
+
+### 1. Grid Garden 
+
+A permis de savoir comment utiliser Grid. Les différentes options et possibilités que Grid présente. 
+
+### 2. Fluidification dans la construction d'un CSS solide 
+
+Comme l'indique le titre, le fait de s'entrainer en evitant le plus possible d'utiliser l'ia pour faire mon boulot, j'ai appris, encore quelques trucs à faire pour m'améliorer mais dans l'ensemble je suis sur la bonne voie 
+ 
+## Utilisation de l'IA
+oui
+
+### Démarche
+corriger des problèmes + répondre à des questions 
+
+### Apports et limites
+correction de ce qu'il fallait, mais des problèmes avec autre chose 
+
+### Prompts significatifs
+1. "[Prompt]" → alors, je suis entrain de faire le css d'une page HTML, et je rencontre un problème. Je suis entrain d'essayer de centrer 3 box, mais je n'y arrive pas, tu pourrai me régler ça et me donner la raison de pourquoi ça ne marche pas ?
+
+-> C'est un grand classique du CSS ! Le problème vient de la manière dont tu as configuré ton CSS Grid, plus précisément à cause de l'unité 1fr mélangée au auto-fit.
+
+Pourquoi ça ne marche pas ?
+Dans ta classe .projets, tu utilises :
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+Le coupable : 1fr. Cette unité dit à chaque colonne : "Prends tout l'espace disponible". Si tu as 3 boîtes sur une ligne, elles vont s'étirer pour occuper 100% de la largeur du conteneur. Comme elles occupent tout l'espace, il n'y a plus rien à "centrer".
+
+L'alignement du conteneur : Par défaut, un bloc <div> (ton .projets) prend toute la largeur de la page. Si le conteneur fait toute la largeur, tes boîtes à l'intérieur ont l'air alignées à gauche (ou étirées) plutôt que centrées dans la page.
+
+La Solution
+Pour régler ça, il faut limiter la largeur maximale du conteneur et le centrer lui-même avec un margin: auto, ou ajuster la gestion des colonnes.
+
+Voici le code corrigé pour ta section .projets :
+
+CSS
+.projets {
+  display: grid;
+  /* 1. On remplace 1fr par une valeur fixe ou on limite la taille */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 350px)); 
+  
+  /* 2. On centre les colonnes à l'intérieur du conteneur grid */
+  justify-content: center; 
+  
+  /* 3. On donne une largeur max au conteneur pour éviter qu'il soit trop large sur grand écran */
+  max-width: 1200px;
+  
+  /* 4. On centre le conteneur lui-même dans la page */
+  margin: var(--space-xl) auto;
+  
+  gap: var(--space-lg);
+  padding: 0 var(--space-md);
+}
+
+2. "[Prompt]" → Alors, tu peux remplacer les couleurs dans le /*Couleurs*/ avec celles utilisées dans le css plus en bas, ainsi que les espacements et aussi si tu peux; réduire le nombre de lignes à 80 si possible :
+
+Gemini a dit
+C'est fait ! J'ai harmonisé tes variables :root avec les valeurs que tu utilisais en "dur" dans ton code (comme antiquewhite ou 20px) et j'ai condensé le tout pour tenir sous la barre des 80 lignes sans perdre en lisibilité.
+
+CSS
+:root {
+  --color-primary: #2563eb; --color-text: #1f2937;
+  --color-bg: #ffffff; --color-bg-alt: antiquewhite; /* Tiré de ton .hero */
+  --color-border: #eee; --color-gray: gray;
+  --space-sm: 0.5rem; --space-md: 20px; /* Aligné sur tes cartes */
+  --space-lg: 2rem; --space-xl: 4rem;
+  --font-base: system-ui, sans-serif; --line-height: 1.6;
+}
+body { font-family: var(--font-base); line-height: var(--line-height); color: var(--color-text); margin: 0; }
+h1, h2, h3 { line-height: 1.2; text-align: center; }
+header { display: flex; justify-content: space-around; align-items: center; gap: 1em; }
+
+.hero {
+  display: flex; flex-direction: column; align-items: center;
+  background-color: var(--color-bg-alt); border: 0.5em solid floralwhite;
+  text-align: center; padding: var(--space-lg);
+}
+.cta {
+  position: relative; font-size: 1.25rem; font-weight: 600; text-transform: uppercase;
+  padding: .5rem .25rem .125rem 0; border: 0; border-bottom: 3px solid black;
+  background: transparent; cursor: pointer;
+}
+.cta:after {
+  position: absolute; bottom: -3px; right: -1.25rem; content: "";
+  width: 1.25rem; border-bottom: 3px solid black;
+  transform-origin: bottom left; transform: rotate(-64deg);
+}
+.projets {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+  justify-content: center; max-width: 1200px; margin: var(--space-xl) auto;
+  gap: var(--space-lg); padding: 0 var(--space-md);
+}
+.projets h2 { grid-column: 1/-1; margin-bottom: var(--space-md); }
+.carte {
+  display: flex; flex-direction: column; border-radius: 8px; 
+  border: 1px solid var(--color-gray); padding: var(--space-md);
+  background-color: var(--color-bg); transition: transform 0.2s, box-shadow 0.2s;
+}
+.carte:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+.apropos-contenu {
+  display: flex; align-items: center; gap: 3rem; 
+  max-width: 1000px; margin: 0 auto; padding: 0 var(--space-md);
+}
+.apropos-contenu img { flex-shrink: 0; border-radius: 12px; max-width: 400px; }
+.apropos h2 { margin-bottom: var(--space-lg); }
+
+footer {
+  display: flex; flex-direction: column; align-items: center;
+  padding: var(--space-lg) 0; background-color: #f9fafb;
+  border-top: 1px solid var(--color-border); margin-top: var(--space-xl);
+}
+footer p { margin-bottom: var(--space-sm); font-weight: 600; }
+footer ul { display: flex; gap: var(--space-lg); list-style: none; padding: 0; margin: 0; }
+footer a { text-decoration: none; color: var(--color-primary); font-weight: 500; transition: 0.2s; }
+footer a:hover { opacity: 0.7; text-decoration: underline; }
+a, button { transition: 0.2s; }
+Ce qui a été optimisé :
+Variables centralisées : J'ai mis antiquewhite dans --color-bg-alt et 20px dans --space-md pour que tu n'aies plus de valeurs "perdues" dans ton code.
+
+Fusion des propriétés : J'ai regroupé certaines déclarations sur une seule ligne (comme les variables ou les propriétés de flexbox) pour gagner de la place sans nuire à la structure.
+
+Nettoyage : J'ai supprimé les doublons (comme la classe .carte qui apparaissait deux fois) et utilisé tes variables partout où c'était possible.
+
+Et donc je l'ai fait parce que 1 j'avais la flemme de trouver les couleurs et de les replacer dans chaque colonne, et sinon pour l'optimisation de l'espace, j'ai fait machine arrière, quand j'ai compris qu'on pouvait poser plusieurs commandes sur la même ligne, alors j'en ai profiter, permettant aussi au cas ou de garder MON TRAVAIL, C'EST LE MIEN
