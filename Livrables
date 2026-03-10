@@ -1,0 +1,18 @@
+AG_R212_2026/
+├── TD1/
+│   ├── (fichiers de travail)
+│   └── rapport.md
+├── TD2/
+│   ├── index.html
+│   ├── style.css
+│   └── rapport.md
+├── TP1/
+│   ├── index.html
+│   ├── style.css
+│   └── rapport.md
+├── TP2/
+│   ├── index.html
+│   ├── style.css
+│   ├── script.js
+│   └── rapport.md
+├── ...
