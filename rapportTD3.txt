@@ -1,0 +1,120 @@
+[Partie 2]
+
+Un site purement HTML/CSS ne peut pas modifier des éléments de la page en temps réel, ce qui est codé sera affiché tant dit qu'un site tel que excalidraw permet la modification de ce qui est affiché en temps réel et est totalement réactifs à ce qu'on fait avec les outils à notre disposition. 
+
+[Partie 3]
+
+Situation							Événement				État					Rendu
+Un menu déroulant qui s'ouvre au clic				On clique sur un bouton			un menu s'ouvre				Une petite page s'ouvre avec de nouvelles choses à accéder 
+
+Un carrousel de photos 						clic sur "suivant"			déroulement				l'image qui suit s'affiche
+
+Un champ de recherche qui filtre une liste			taper dans l'input recherche 		recherche de ce qu'il faut		résultat des recherches
+
+Un bouton Ajouter au panier					Clic sur bouton				panier: article 0->1			compteur du panier est update 
+ 
+Une FAQ accordéon (clic sur question → réponse apparaît)	Clic sur une question 			réponse : caché -> visible		réponse apparu sous la question 
+
+
+// 1. Trouver le premier titre
+document.querySelector('h1') : <h1 id="firstHeading" class="firstHeading mw-first-heading">Bienvenue sur Wikipédia</h1>
+
+// 2. Lire son texte
+document.querySelector('h1').textContent : 'Bienvenue sur Wikipédia'
+
+// 3. Le modifier !
+document.querySelector('h1').textContent = 'Je contrôle cette page !'
+
+// 4. Trouver tous les liens
+document.querySelectorAll('a') :624
+
+// 5. Compter les liens
+document.querySelectorAll('a').length = environ 624
+
+// 6. Changer la couleur d'un élément (juste pour voir)
+document.querySelector('h1').style.color = 'red' : ça marche 
+
+
+1. L'encyclopédie libre que vous pouvez améliorer.
+
+2. Il y'en a 22
+
+----
+
+[Partie 4]
+
+1. Événement : clic sur .menu-btn
+État : la classe is-open est ajoutée ou retirée du menu
+Effet : le menu s'ouvre ou se ferme (le CSS définit ce que .is-open affiche)
+Décodage ligne par ligne :
+
+document.querySelector('.menu-btn') → trouve le bouton dans la page
+addEventListener('click', () => { ... }) → "quand on clique, exécute ce code"
+classList.toggle('is-open') → ajoute la classe si absente, la retire si présente
+
+2. 	Il n'y a pas d'évènements, le code s'exécute tout de suite au chargement de la page 
+	Effet : le texte de <h1> est remplacé par "Bienvenue !"
+
+3.	Événement : clic sur #theme-toggle
+État : la classe dark est ajoutée ou retirée du <body>
+Effet : si le CSS définit des variables différentes pour .dark, toute la page change d'apparence (thème sombre)
+
+4.	Événement : clic sur .plus
+État : la variable compteur augmente de 1
+Rendu : le texte de .compteur affiche la nouvelle valeur
+
+5.	Événement : sélectionne n'importe quelle question de la FAQ
+État : affiche ou cache la réponse selon le moment ou on en est 
+Rendu : comme dit avant, chaque question affiche/masque sa réponse 
+
+[Partie 5]
+
+1.	const liens = document.querySelectorAll('a');
+console.log("Nombre de liens sur la page :", liens.length);
+
+2.	document.querySelector('nav a').textContent = 'Lien Modifié !';
+
+3.	const premierPara = document.querySelector('p');
+premierPara.classList.add('surbrillance');
+
+4.	const style = document.createElement('style');
+style.textContent = '.surbrillance { background-color: yellow; color: black; border: 2px solid orange; padding: 5px; }';
+document.head.appendChild(style);
+
+[Partie 6]
+
+
+Affirmation									V ou F ?
+element.style.display = 'none' est la bonne façon de cacher un élément		F
+Le JS devrait ajouter une classe et laisser le CSS gérer le visuel		V
+classList.toggle est un raccourci pour ajouter OU retirer une classe		F (Vrai)
+Pour changer la couleur d'un texte, j'écris element.style.color = 'blue'	F
+Les sélecteurs de querySelector sont différents de ceux du CSS			V (Faux)
+
+[Partie 7] 
+
+
+Question								Oui / Non / À peu près
+Je peux expliquer pourquoi le JS existe (ce que le CSS ne fait pas)	Oui
+Je comprends le modèle événement → état → rendu	 			à peu près
+Je sais utiliser querySelector dans la console	 			à peu près
+Je comprends ce que fait classList.toggle	 			à peu près 
+Je sais pourquoi on évite element.style.xxx	 			Non 
+
+RAPPORT 
+
+1. le modèle évènement -> état -> rendu permet de comprendre ce qu'il ce passe lorsqu'on effectue une action/intéraction avec un élément de la page. par exemple : je clique sur un bouton, il active le déploiement d'un onglet et l'ongle est ouvert et je peux intéragir avec.
+
+2. classList.toggle : toggle sert à indiquer au navigateur: "Si c'est là, enlève-le ; si c'est pas là, mets-le." et inversement 
+
+
+Points clés 
+
+J'ai apprit les bases de l'utilisation de JavaSCript
+
+J'ai aussi découvert comment utiliser la console de commande disponible pour la modification d'éléments sur navigateur
+
+
+Utilisation IA 
+
+J'ai simplement demandé à un moment comment faire pour afficher la modification d'un texte d'un lien, ce qu'il fallait que je mette dans les '', mais même là ça n'a pas marché 
