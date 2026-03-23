@@ -1,0 +1,14 @@
+# Rapport — TP1
+
+## Points clés
+
+### 1. Le menu burger 
+
+J'ai apprit à faire un menu burger (hmm le bon burgouzz), 
+utiliser const bouton, querySelector… 
+
+### 2. Modale 
+
+Comment afficher une mini fenêtre quand on appuie sur un bouton avec des informations dedans 
+
+AUCUNE UTILISATION DE L'IA 
