@@ -1,0 +1,13 @@
+# Rapport — TP3
+
+## Points clés 
+
+### 1. Apprendre à utiliser la sauvegarde d'un élément dans JS 
+Comme on a pu le faire dans le TP, stocker un ajout, avec les lignes pour sauvegarder avec : 
+function sauvegarder() {
+  localStorage.setItem('projets', JSON.stringify(projets));
+}
+et donc placer la fonction sauvegarder dans le bon endroit juste en dessous de la création d'un "projet" dans le cadre de ce tp 
+
+### 2. Apprendre à supprimer un projet créé
+On nous a montré comment s'occuper pour supprimer un projet stocké dans le site web, dans ce TP, il fallait ajouter les lignes de code dans la fonction pour la liste de Projets et qu'il fallait entrer les commandes la dedans et non après car sinon il ne modifierai qu'après rechargement de la page. 
